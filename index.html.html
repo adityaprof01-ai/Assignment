@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GovEase — Service Clarity Prototype</title>
+<style>
+:root{--navy:#133852;--teal:#1c6871;--mint:#e0f3ef;--paper:#f8f7f2;--ink:#2c3746;--muted:#63717e;--line:#dce5e8;--orange:#de8b45;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px max(20px,calc((100vw - 1080px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:800;letter-spacing:-.04em;font-size:1.4rem}.logo span{color:#8ed9cb}
+header small{color:#dbe9ed}main{max-width:1080px;margin:0 auto;padding:28px 20px 50px}
+.notice{background:#fff4e7;border:1px solid #f0d1a9;padding:12px 14px;border-radius:12px;color:#72451c;font-size:.9rem;margin-bottom:20px}
+.progress{display:flex;gap:8px;margin:18px 0 28px}.step{height:5px;flex:1;border-radius:20px;background:#d9e1e4}.step.active{background:var(--teal)}
+.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start}
+.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 8px 28px rgba(19,56,82,.05)}
+.eyebrow{text-transform:uppercase;font-size:.72rem;letter-spacing:.12em;font-weight:800;color:var(--teal)}
+h1{font-size:clamp(2rem,5vw,3.25rem);line-height:1.05;letter-spacing:-.05em;color:var(--navy);margin:12px 0}
+h2{font-size:1.55rem;line-height:1.2;color:var(--navy);margin:10px 0 14px;letter-spacing:-.03em}
+p{line-height:1.6}.muted{color:var(--muted)}.search{display:flex;gap:8px;margin:20px 0}.search input{flex:1;min-width:0;border:1px solid #b8c8cf;border-radius:12px;padding:13px;font:inherit}
+button,.btn{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;background:var(--teal);color:white;font-weight:750;font:inherit;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}
+button.secondary,.btn.secondary{background:white;border:1px solid var(--line);color:var(--navy)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.services{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.service{border:1px solid var(--line);padding:15px;border-radius:14px;background:white;text-align:left;color:var(--ink)}.service strong{display:block;color:var(--navy);margin-bottom:5px}.service span{font-size:.88rem;color:var(--muted)}
+.pill{display:inline-block;background:var(--mint);color:var(--teal);border-radius:999px;padding:6px 10px;font-size:.78rem;font-weight:800}
+.list{list-style:none;padding:0;margin:18px 0}.list li{padding:12px 0;border-bottom:1px solid #edf0f1;display:flex;gap:10px;align-items:flex-start}.list li:before{content:"✓";display:grid;place-items:center;flex:0 0 23px;height:23px;border-radius:7px;background:var(--mint);color:var(--teal);font-weight:800}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.meta div{background:#f4f7f7;border-radius:12px;padding:12px}.meta b{display:block;color:var(--navy);font-size:.83rem;margin-bottom:4px}.meta span{font-size:.9rem}
+.side h3{margin-top:0;color:var(--navy)}.side ul{padding-left:20px;line-height:1.7}.footer{font-size:.82rem;color:var(--muted);margin-top:22px}
+.hidden{display:none!important}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.services{grid-template-columns:1fr}.panel{padding:20px}.meta{grid-template-columns:1fr 1fr}header{align-items:flex-start;flex-direction:column}}
+</style></head>
+<body>
+<header><div class="logo">Gov<span>Ease</span></div><small>Service clarity concept · Student prototype</small></header>
+<main>
+<div class="notice"><b>Concept prototype — not an official government service.</b> Requirements vary by state and issuing authority. Always verify details on the relevant official portal.</div>
+<div class="progress" aria-label="Prototype progress"><div class="step active" id="p1"></div><div class="step" id="p2"></div><div class="step" id="p3"></div><div class="step" id="p4"></div></div>
+<div class="layout">
+<section class="panel">
+<div id="home">
+<div class="eyebrow">Start with your task</div><h1>What do you need help with?</h1>
+<p class="muted">Find a service, understand the next step, and continue to an official source with more confidence.</p>
+<div class="search"><input id="search" aria-label="Search services" placeholder="Try “income certificate”"><button onclick="searchService()">Search</button></div>
+<div class="eyebrow">Common services</div>
+<div class="services">
+<button class="service" onclick="chooseService('Income certificate')"><strong>Income certificate</strong><span>Understand the service and preparation steps</span></button>
+<button class="service" onclick="chooseService('Caste certificate')"><strong>Caste certificate</strong><span>Explore the service journey</span></button>
+<button class="service" onclick="chooseService('Birth certificate')"><strong>Birth certificate</strong><span>Find the relevant official channel</span></button>
+<button class="service" onclick="chooseService('Application status')"><strong>Track an application</strong><span>Find where status is usually checked</span></button>
+</div>
+</div>
+<div id="service" class="hidden">
+<div class="eyebrow">Step 1 · Understand</div><h2 id="serviceTitle">Income certificate</h2>
+<p id="serviceDesc">A document that may be used to demonstrate income for certain services or benefits. The purpose and requirements depend on the issuing authority.</p>
+<div class="meta"><div><b>Jurisdiction</b><span>Choose your state before relying on a checklist.</span></div><div><b>Source status</b><span>Official requirements not verified in this demo.</span></div></div>
+<p class="muted">This concept explains a service; it does not decide eligibility, issue documents, or submit applications.</p>
+<div class="actions"><button onclick="go('checklist')">View preparation checklist →</button><button class="secondary" onclick="go('home')">Back</button></div>
+</div>
+<div id="checklist" class="hidden">
+<div class="eyebrow">Step 2 · Prepare</div><h2>Before you continue</h2>
+<p class="muted">Use these prompts to prepare for checking the official requirements. This is not a definitive document list.</p>
+<ul class="list"><li>Confirm the issuing authority for your state or district.</li><li>Read the current requirements on the official portal.</li><li>Check whether supporting documents or a fee are required.</li><li>Keep only relevant information ready; do not share sensitive data here.</li></ul>
+<div class="notice">Checklist status: illustrative. Verify every requirement with the official authority before applying.</div>
+<div class="actions"><button onclick="go('continue')">Continue safely →</button><button class="secondary" onclick="go('service')">Back</button></div>
+</div>
+<div id="continue" class="hidden">
+<div class="eyebrow">Step 3 · Official hand-off</div><h2>Continue on the official portal</h2>
+<p>GovEase does not issue certificates or submit applications. The relevant government department or state portal is responsible for authoritative requirements and processing.</p>
+<div class="notice">No external application link is embedded in this demo because the correct destination depends on your state and service.</div>
+<label for="state"><b>Select a state to guide your next step</b></label><br><select id="state" style="width:100%;margin-top:8px;padding:12px;border:1px solid #b8c8cf;border-radius:10px;font:inherit"><option value="">Choose a state/UT</option><option>Karnataka</option><option>Andhra Pradesh</option><option>Bihar</option><option>Tamil Nadu</option><option>Other / not sure</option></select>
+<div class="actions"><button onclick="showReminder()">Confirm selection</button><button class="secondary" onclick="go('checklist')">Back</button></div><p id="reminder" class="muted" aria-live="polite"></p>
+</div>
+</section>
+<aside class="panel side">
+<div class="eyebrow">Design intent</div><h2>Clarity before action.</h2>
+<p>GovEase is a proposed orientation layer—not a replacement for official portals such as UMANG, DigiLocker, or state/department websites.</p>
+<h3>What this concept prioritizes</h3>
+<ul><li>Everyday task language instead of department jargon.</li><li>Visible jurisdiction and source transparency.</li><li>Short, scannable preparation prompts.</li><li>A clear boundary between guidance and official processing.</li></ul>
+<hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+<h3>What to test with users</h3>
+<p class="muted">Can a person find a relevant service, explain what it is for, understand that requirements vary, and identify where official processing happens?</p>
+<div class="footer">Accessibility note: keyboard-focus styles, semantic controls, readable contrast, and responsive layout are included in this prototype. A full WCAG audit has not been conducted.</div>
+</aside>
+</div>
+<div class="footer">GovEase · UX case study prototype · Prepared by Aditya Raj · USN: 24BTRIS003 · Jain University · B.Tech ISE · 26 October 2026</div>
+</main>
+<script>
+let current='home', chosen='Income certificate';
+function go(next){['home','service','checklist','continue'].forEach(id=>document.getElementById(id).classList.toggle('hidden',id!==next));current=next;let n={home:1,service:2,checklist:3,continue:4}[next];for(let i=1;i<=4;i++)document.getElementById('p'+i).classList.toggle('active',i<=n);window.scrollTo({top:0,behavior:'smooth'});}
+function chooseService(name){chosen=name;document.getElementById('serviceTitle').textContent=name;document.getElementById('serviceDesc').textContent=name==='Income certificate'?'A document that may be used to demonstrate income for certain services or benefits. The purpose and requirements depend on the issuing authority.':'Explore the relevant service and verify its purpose, requirements, and official destination with the responsible authority.';go('service');}
+function searchService(){let v=document.getElementById('search').value.toLowerCase();if(v.includes('income'))chooseService('Income certificate');else if(v.includes('caste'))chooseService('Caste certificate');else if(v.includes('birth'))chooseService('Birth certificate');else if(v.includes('status')||v.includes('track'))chooseService('Application status');else{alert('Try income certificate, caste certificate, birth certificate, or application status.');}}
+function showReminder(){let s=document.getElementById('state').value;document.getElementById('reminder').textContent=s?'Selected: '+s+'. Next, verify the current service requirements and official application link for this jurisdiction. This demo does not submit or retrieve an application.':'Please choose a state/UT, or select “Other / not sure”.';}
+</script></body></html>
